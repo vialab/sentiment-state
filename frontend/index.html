@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="style/style.css" type="text/css">
+        <link rel="stylesheet" href="style/loading.css" type="text/css">
+        <script src="d3/d3.v3.js" charset="utf-8"></script>
+        <script src="scripts/d3vialabss.js" charset="utf-8"></script> 
+        <title>SentimentState - vialab</title>
+    </head>
+<body>
+    <div id="maincontainer">
+        <div id="topsection">
+            <div class="innertube">
+                <h1>SentimentState</h1>
+            </div>
+        </div>
+        <div id="contentwrapper">
+            <div id="contentcolumn">
+                <div class="innertube">
+                    <div id="texttip">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="leftcolumn">
+        <div class="innertube">
+        <div id="error"></div>
+            <div id="searchform">
+                <form name="myform" onsubmit="validateForm(); return false;">
+                        <input type="text" id="twitterName" placeholder="Enter Twitter Name" /></br>
+                </form>
+                <button onclick="validateForm()">Submit!</button>
+            </div>
+            <div id="profilepic"></div>
+            <div id="info"></div>
+            <div id="time"></div>
+            <div id="pie">
+            </div>
+        </div>
+
+        </div>
+
+        <div id="rightcolumn">
+            <div class="innertube">
+                <div id = "help">
+                    <a href="javascript:overlay()">?<br><span style="font-size: 15pt; font-weight: normal;">Help</span></a></div>
+                </div>
+        </div>
+
+        <div id="footer">
+
+            <a href="http://www.science.uoit.ca/" target="_blank"><img src="img/UOIT_RGB_sm.jpg" id="uoitLogo" style="padding-right:7px;padding-top:7px;height:40px;width:90px;border-right:5px;"></a>
+            <a href="http://vialab.science.uoit.ca" target="_blank"><img src="img/vialab.png" style="height:40px;width:110px;"></a>
+			<a href="http://www.purl.org/net/NRCemotionlexicon" target="_blank">Lexicon Database</a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+<div id="overlay">
+    <div>
+        <a href="javascript:overlay()"><span style="float:right"><img src="img/close-button.png" alt="close" width="25" height="25"></span></a>
+        <br/>
+        <p><span style="font-weight: bold">SentimentState: Exploring Sentiment Analysis on Twitter</span></p>
+        <p>This visualization is a tool that shows the sentiment analysis of a user's tweets collected from Twitter. Each dot represents an individual tweet and each tweet is analyzed and scored
+            based on 10 different emotions (Positive, Negative, Anger, Anticipation, Disgust, Fear, Joy, Sadness, Surprise, Trust).</p>
+        <p>Hovering over each dot will show a tooltip displaying the date and time of the tweet, the sentiment analysis score and the text of the tweet.
+        The <span style="color:#4682b4; font-weight:bold;">blue</span> dots represent tweets that have been created by the user,
+            <span style="color:#8F2831;font-weight:bold">red</span> dots represent tweets that have been retweeted by the user.</p>
+        <p>You can zoom into a particular region on the visualization using the smaller graph and that section would be mirrored on the larger graph.</p>
+        <p>The pie charts shows a summary of each of the sentiments, and can be used to filter the dots by clicking on the sentiment of interest.</p>
+
+        <p><i>Christopher Collins & Taurean Scantlebury</i></p>
+		Contact:<br><br>
+		<a href="mailto:christopher.collins@uoit.ca?Subject=SentimentState%20Information" target="_top">christopher.collins@uoit.ca</a>/
+		<a href="mailto:taurean.scantlebury@uoit.net?Subject=SentimentState%20Information" target="_top">taurean.scantlebury@uoit.net</a><br><br>
+        <a href="javascript:overlay()">close</a>
+    </div>
+</div>
+
+<div id="error_overlay">
+    <div>
+        <a href="javascript:error_overlay()"><span style="float:right"><img src="img/close-button.png" alt="close" width="25" height="25"></span></a>
+        <br/>
+        <p>Error Occured: Please check the following things:</p>
+        <p>1) The entered user name is not mispelt.</p>
+        <p>2) The entered user name is not locked/private</p>
+		<p>Contact:<br><br>
+		<a href="mailto:taurean.scantlebury@uoit.net?Subject=SentimentState%20Error" target="_top">taurean.scantlebury@uoit.net</a>
+        </p>
+        <a href="javascript:error_overlay()">close</a>
+    </div>
+</div>
