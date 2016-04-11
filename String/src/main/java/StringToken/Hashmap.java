@@ -28,7 +28,7 @@ public class Hashmap {
 		String dataRow; 		// row read in from the lexicon
 
 		hm = new HashMap<String, List<Integer>>();
-		rsc = this.getClass().getResourceAsStream("NRCemotionlexicon.txt");
+		rsc = this.getClass().getResourceAsStream("/NRCemotionlexicon.txt");
 		CSVFile = new BufferedReader(new InputStreamReader(rsc));
 		dataRow = CSVFile.readLine(); // Read the first line of data.
 		// loops through each line of the lexicon, 
