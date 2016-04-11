@@ -56,4 +56,14 @@ public class Credentials {
 		return new TwitterCredentials(credentials);
 	}
 	
+	public static TwitterCredentials getCredentials() {
+		HashMap<String, String> credentials = new HashMap<String, String>();
+		credentials.put("username", System.getenv("SS_USERNAME"));
+		credentials.put("consumerKey", System.getenv("SS_CONSUMER_KEY"));
+		credentials.put("consumerSecret", System.getenv("SS_CONSUMER_SEC"));
+		credentials.put("token", System.getenv("SS_TOKEN"));
+		credentials.put("tokenSecret", System.getenv("SS_TOKEN_SEC"));
+		
+		return new TwitterCredentials(credentials);
+	}
 }

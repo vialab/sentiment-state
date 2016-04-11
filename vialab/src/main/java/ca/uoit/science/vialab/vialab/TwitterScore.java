@@ -57,9 +57,8 @@ public class TwitterScore {
 				TwitterRESTClient client;
 				TwitterCredentials cred = null;
 				File file = new File("log.txt");
-				InputStream rsc = this.getClass().getResourceAsStream("vialab");
 				
-				cred = Credentials.getCredentials(rsc);
+				cred = Credentials.getCredentials();
 				client = new TwitterRESTClient(cred);
 
 				String username = request.params(":name");
