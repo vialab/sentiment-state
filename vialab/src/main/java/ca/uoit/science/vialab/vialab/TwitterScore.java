@@ -22,13 +22,19 @@ import StringToken.*;
 
 public class TwitterScore {
 
-	public static void main(String[] args) {//throws FileNotFoundException{
+	public static void main(String[] args) {
+		String portStr = System.getenv("PORT");
+		
+		if (portStr) {
+			port(Integer.valueOf(portStr));
+		}
+
 		get(new Route("/check") {
-	         @Override
-	         public Object handle(Request request, Response response) {
-	            return "<h1>Spark is Active!</h1>";
-	         }
-	      });
+			@Override
+			public Object handle(Request request, Response response) {
+				return "<h1>Spark is Active!</h1>";
+			}
+		});
 		
 		// allows access to the json file
 		before(new Filter("/twitter/:name") {
@@ -94,7 +100,7 @@ public class TwitterScore {
 				}
 
 				long end = System.currentTimeMillis(); // ends counting
-				long dif = (end - start)/1000;
+				long dif = (end - start) / 1000;
 
 				// Log in a more Apache-friendly format for easier parsing in the future
 				String out = String.format("%s - %s [%s] \"GET /twitter/%s\" " + 
