@@ -124,8 +124,6 @@ public class TwitterRESTClient {
 	}
 	
 	public JSONArray getAllUserTweets(String username) throws LimitReachedException, BadCredentialsException{
-		System.out.println("Requesting tweets from username " + username + "...\n");
-		
 		JSONArray all = new JSONArray(); 
 		
 		Long max_id = null;
@@ -145,14 +143,10 @@ public class TwitterRESTClient {
 		
 		} catch (JSONException e) {	e.printStackTrace(); }
 		
-		System.out.println(all.length() + " tweets from username " + username + " received.\n");
-		
 		return all;
 	}
 			
 	public JSONArray getAllUserTweets(Long userID) throws LimitReachedException, BadCredentialsException{
-		System.out.println("Requesting tweets from userID " + userID + "...\n");
-		
 		JSONArray all = new JSONArray(); 
 		
 		Long max_id = null;
@@ -171,8 +165,6 @@ public class TwitterRESTClient {
 			} while (true);
 		
 		} catch (JSONException e) {	e.printStackTrace(); }
-		
-		System.out.println(all.length() + " tweets from userID " + userID + " received.\n");
 		
 		return all;
 	}
@@ -220,7 +212,6 @@ public class TwitterRESTClient {
 		} catch (OAuthMessageSignerException | OAuthExpectationFailedException
 				| OAuthCommunicationException e) {
 			e.printStackTrace();
-			System.out.println("Sh*t! A problem occurred while signing the URL...");
 		}
 	}
 	
@@ -276,7 +267,6 @@ public class TwitterRESTClient {
 	
 	public static void main(String[] args) throws Exception{
 		TwitterRESTClient c = new TwitterRESTClient(Credentials.getCredentials("rafaveguim"));
-		System.out.println(c.getAllUserTweets("rafaveguim").get(1));
 ;//		while (true){
 //			JSONArray tweets = c.getAllUserTweets("16319797");
 //		}
