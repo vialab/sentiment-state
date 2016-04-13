@@ -43,7 +43,7 @@ public class TwitterScore {
 			@Override
 			public Object handle(Request request, Response response) {
 
-				DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss z");
+				DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss Z");
 				Date date = new Date();
 				TwitterRESTClient client;
 				TwitterCredentials cred = null;
