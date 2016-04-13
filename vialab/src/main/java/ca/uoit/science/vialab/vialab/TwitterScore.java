@@ -25,8 +25,8 @@ public class TwitterScore {
 	public static void main(String[] args) {
 		String portStr = System.getenv("PORT");
 		
-		if (portStr) {
-			port(Integer.valueOf(portStr));
+		if (portStr == null) {
+			setPort(Integer.valueOf(portStr));
 		}
 
 		get(new Route("/check") {
