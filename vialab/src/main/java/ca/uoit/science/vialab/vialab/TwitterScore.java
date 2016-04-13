@@ -43,7 +43,7 @@ public class TwitterScore {
 			@Override
 			public Object handle(Request request, Response response) {
 
-				DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss XXX");
+				DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss z");
 				Date date = new Date();
 				TwitterRESTClient client;
 				TwitterCredentials cred = null;
@@ -97,7 +97,7 @@ public class TwitterScore {
 				long dif = (end - start)/1000;
 
 				// Log in a more Apache-friendly format for easier parsing in the future
-				String out = String.format("%s - %s [%s] \"GET /twitter/%s\"" + 
+				String out = String.format("%s - %s [%s] \"GET /twitter/%s\" " + 
 					"\"TIME=%d&NUM_TWEETS=%d&LEXICON_WORDS=%d\"",
 					request.ip(), username, dateFormat.format(date), username, dif,
 					tweets.length(), CalculateScore.count);
