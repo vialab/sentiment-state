@@ -14,7 +14,7 @@ ENV         SS_TOKEN_SEC    secret
 # Enable installation of the Oracle JDK without user interaction
 RUN         apt-get update && apt-get install -y \
   software-properties-common \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 RUN         add-apt-repository -y ppa:webupd8team/java
 RUN         echo oracle-java8-installer \
   shared/accepted-oracle-license-v1-1 select true | \
@@ -24,7 +24,7 @@ RUN         apt-get update && apt-get install -y \
   maven \
   git \
   oracle-java8-installer \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
 # Fetch the latest version of the code
 RUN         git clone https://github.com/vialab/sentiment-state.git \
@@ -34,5 +34,8 @@ WORKDIR     /usr/src/sentiment-state
 
 # Build code and create JAR file
 RUN         mvn package
+
+# This may or may not remove the Maven cache
+RUN         rm -rf /root/.m2
 
 ENTRYPOINT  ["java", "-jar", "vialab/target/vialab-0.0.1-SNAPSHOT-jar-with-dependencies.jar"]
