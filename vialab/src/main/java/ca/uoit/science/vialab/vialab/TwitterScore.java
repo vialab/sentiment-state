@@ -1,10 +1,7 @@
 package ca.uoit.science.vialab.vialab;
 
 import static spark.Spark.*;
-import org.slf4j.*;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,12 +10,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
 
 import spark.*;
 import ca.uoit.kddm.auth.Credentials;
@@ -31,7 +22,7 @@ import StringToken.*;
 
 public class TwitterScore {
 
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) {//throws FileNotFoundException{
 		get(new Route("/check") {
 	         @Override
 	         public Object handle(Request request, Response response) {
@@ -52,11 +43,10 @@ public class TwitterScore {
 			@Override
 			public Object handle(Request request, Response response) {
 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a");
+				DateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy:HH:mm:ss XXX");
 				Date date = new Date();
 				TwitterRESTClient client;
 				TwitterCredentials cred = null;
-				File file = new File("log.txt");
 				
 				cred = Credentials.getCredentials();
 				client = new TwitterRESTClient(cred);
@@ -71,7 +61,7 @@ public class TwitterScore {
 					e1.printStackTrace();
 				}
 
-				List<Integer> score;
+				List<Integer> score = null;
 				JSONArray tweets = null;
 				long start = System.currentTimeMillis(); // starts counting
 				try {
@@ -82,7 +72,6 @@ public class TwitterScore {
 					e.printStackTrace();
 				}
 
-				System.out.println("Beginning to calculate tweets...");
 				for (int i=0; i<tweets.length(); i++) {
 					try{
 						JSONObject item = tweets.getJSONObject(i);
@@ -106,29 +95,14 @@ public class TwitterScore {
 
 				long end = System.currentTimeMillis(); // ends counting
 				long dif = (end - start)/1000;
-				System.out.println("Elapsed Time: "+ dif+"s");
-				System.out.println(CalculateScore.count + " words compared to the lexicon");
-				System.out.println("Done...Sending to client...");
-				System.out.println();
 
-				try{
-				if (!file.exists())
-					file.createNewFile();
-							
-				PrintWriter out = new PrintWriter(new FileWriter(file, true));
-				out.println(dateFormat.format(date));
-				out.println("User: "+username);
-				out.println("Requested Client IP: "+ request.ip());
-				out.println("Duration: "+dif+"s");
-				out.println("Number of Tweets: "+tweets.length());
-				out.println("Words compared to lexicon: "+ CalculateScore.count);
-				out.println("---------------------------------------------------");
-				out.close();
-				}				
-				catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}			
+				// Log in a more Apache-friendly format for easier parsing in the future
+				String out = String.format("%s - %s [%s] \"GET /twitter/%s\"" + 
+					"\"TIME=%d&NUM_TWEETS=%d&LEXICON_WORDS=%d\"",
+					request.ip(), username, dateFormat.format(date), username, dif,
+					tweets.length(), CalculateScore.count);
+				System.out.println(out);
+
 				return tweets;
 			}
 		});       
